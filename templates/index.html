@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid19 Detector</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="static/style.css">
+    
+    <script>
+        function toggle(source) {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i] != source)
+                    checkboxes[i].checked = source.checked;
+            }
+        }
+        
+    </script>
+</head>
+
+<body>
+    <div class="bg-image">
+        <div class="overlay"></div>
+    </div>
+    <div class="container">
+
+        {% if result==1 %}
+            <div class="result-container">
+                <h4>Covid19 Detected :(</h4>
+                <button onclick=window.location.href="{{url_for('index')}}">Retry</button>
+            </div>
+
+        {% elif result==0 %}
+        <div class="result-container">
+            <h4>No Covid19 Detected :)</h4>
+            <button onclick=window.location.href="{{url_for('index')}}">Retry</button>
+        </div>
+
+        {% else %}
+        <form method="POST" class="d-flex flex-column" action="/">
+
+            <label><input type="checkbox" class="custom-control-input" onclick="toggle(this);" id="selectAll" />Select all<br /></label>
+
+            <label><input type="checkbox" class="custom-control-input"name="field1" value="Breathing_Problem" onclick="deselectAll()">Breathing_Problem</br></label>
+            <label><input type="checkbox" class="custom-control-input"name="field2" value="Feaver">Feaver</br></label>
+            <label><input type="checkbox" class="custom-control-input"name="field3" value="Dry_Cough">Dry_Cough</br></label>
+            <label><input type="checkbox" class="custom-control-input"name="field4" value="Sore_throat">Sore_throat</br></label>
+            <label><input type="checkbox" class="custom-control-input"name="field5" value="Running_Nose">Running_Nose</br></label>
+            <label><input type="checkbox" class="custom-control-input"name="field6" value="Asthma">Asthma</br></label>
+            <label><input type="checkbox" class="custom-control-input"name="field7" value="Chronic_Lung_Disease">Chronic_Lung_Disease</br></label>
+            <label><input type="checkbox" class="custom-control-input"name="field8" value="Headache">Headache</br></label>
+            <label><input type="checkbox" class="custom-control-input"name="field9" value="Heart_Disease">Heart_Disease</br></label>
+            <label><input type="checkbox" class="custom-control-input"name="field10" value="Diabetes">Diabetes</br></label>
+            <label><input type="checkbox" class="custom-control-input"name="field11" value="Hyper_Tension">Hyper_Tension</br></label>
+            <label><input type="checkbox" class="custom-control-input"name="field12" value="Fatigue">Fatigue</br></label>
+            <label><input type="checkbox" class="custom-control-input"name="field13" value="Gastrointestinal">Gastrointestinal</br></label>
+        <label><input type="checkbox" class="custom-control-input"name="field14" value="Abroad_travel">Abroad_travel</br></label>
+        <label><input type="checkbox" class="custom-control-input"name="field15"
+                value="Contact_with_COVID_Patient">Contact_with_COVID_Patient</br></label>
+        <label><input type="checkbox" class="custom-control-input"name="field16"
+                value="Attended_Large_Gathering">Attended_Large_Gathering</br></label>
+        <label><input type="checkbox" class="custom-control-input"name="field17"
+                value="Visited_Public_Exposed_Places">Visited_Public_Exposed_Places</br></label>
+        <label><input type="checkbox" class="custom-control-input"name="field18"
+                value="Family_working_in_Public_Exposed_Places">Family_working_in_Public_Exposed_Places</br></label>
+
+        <input class="btn btn-primary" type="submit" style="margin-top: 1rem; margin-bottom: 1rem;">
+
+            
+
+    </form>
+    {% endif %}
+</div>
+</body>
+
+</html>
